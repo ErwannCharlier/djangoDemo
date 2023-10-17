@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.post-detail {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.post-image img {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-description {
+    margin-top: 20px;
+}
+
+.post-comments {
+    margin-top: 20px;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-text {
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+</style>
+{% load static %}
+
+<div class="post-detail">
+    <div class="post-image">
+        <img src="{% static post.imageName %}" alt="{{ post.imageName }}">
+    </div>
+    <div class="post-description">
+        <p>{{ post.description }}</p>
+    </div>
+    <div class="post-comments">
+        <h2>Commentaires</h2>
+        <ul>
+            {% for comment in comments %}
+            <li>
+                <div class="comment-text">{{ comment.content }} </div>
+            </li>
+            {% endfor %}
+
+            <!-- Ajoutez d'autres commentaires ici -->
+        </ul>
+    </div>
+    <form action="createComment/" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" maxlength="100" required>
+</form>
+</div>
+
+{% endblock %}

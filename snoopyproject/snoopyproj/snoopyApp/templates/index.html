@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.photo-item {
+    position: relative;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.photo-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.photo-caption {
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
+
+</style>
+{% load static %}
+
+<div class="photo-grid">
+    {% for post in posts %}
+        <div class="photo-item">
+            <a href="post/{{ post.id }}">
+                <img src="{% static post.imageName %}" alt="{{ post.imageName }}">
+
+                <div class="photo-caption">{{ post.description }}</div>
+            </a>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
