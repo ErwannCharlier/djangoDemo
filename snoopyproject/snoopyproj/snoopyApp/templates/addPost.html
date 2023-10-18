@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Styles CSS pour le formulaire */
+    .add-image-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group select {
+        width: 100%;
+    }
+</style>
+
+<div class="add-image-form">
+    <h2>Ajouter une image</h2>
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}  <!-- Assurez-vous que cette ligne est présente au début du modèle -->
+
+{% block content %}
+<style>
+    .about-page {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .about-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .about-content {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .snoopy-image {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="about-page">
+    <h1 class="about-title">À propos de Snoopy</h1>
+    <p class="about-content">
+        Snoopy est un personnage de bande dessinée créé par Charles M. Schulz. Il est l'un des personnages les plus emblématiques de la bande dessinée Peanuts. Snoopy est un chien beagle imaginatif, charismatique et souvent philosophe. Il est également connu pour son ami, Charlie Brown, et sa quête du sens de la vie. Snoopy est aimé par des millions de fans à travers le monde.
+    </p>
+    <img class="snoopy-image" src="{% static 'coolpic.png' %}" alt="Snoopy">
+</div>
+{% endblock %}

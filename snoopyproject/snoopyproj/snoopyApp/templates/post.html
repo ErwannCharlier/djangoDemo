@@ -41,7 +41,7 @@
 
 <div class="post-detail">
     <div class="post-image">
-        <img src="{% static post.imageName %}" alt="{{ post.imageName }}">
+        <img src="{{ post.image.url }} " alt="not loading">
     </div>
     <div class="post-description">
         <p>{{ post.description }}</p>
@@ -52,16 +52,20 @@
             {% for comment in comments %}
             <li>
                 <div class="comment-text">{{ comment.content }} </div>
+                <a href="{% url 'edit_comment' comment.id %}">Modifier</a>
+                <a href="{% url 'delete_comment' comment.id %}">Supprimer</a>
             </li>
             {% endfor %}
-
             <!-- Ajoutez d'autres commentaires ici -->
         </ul>
     </div>
-    <form action="createComment/" method="post">
-    <label for="your_name">Your name: </label>
-    <input id="your_name" type="text" name="your_name" maxlength="100" required>
-</form>
+    <div class="column is-one-third">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button is-success is-fullwidth is-medium mt-5" type="submit">Envoyer</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

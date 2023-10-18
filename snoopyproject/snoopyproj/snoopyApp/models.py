@@ -12,8 +12,8 @@ class Character(models.Model):
 
 class Post(models.Model):
     description = models.CharField(max_length=512)
-    imageName = models.CharField(max_length=30)
     characters = models.ManyToManyField(Character)
+    image = models.ImageField(upload_to='uploads/')
 
     def __str__(self):
         return self.description
@@ -22,5 +22,7 @@ class Post(models.Model):
 class Comment(models.Model):
     content = models.CharField(max_length=512)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    def delete_comment(self):
+        self.delete()
 
 

@@ -15,7 +15,9 @@
     border-radius: 5px;
     overflow: hidden;
     transition: transform 0.2s;
+    min-height: 300px;
 }
+
 
 .photo-item img {
     max-width: 100%;
@@ -33,20 +35,83 @@
     transform: scale(1.05);
 }
 
+.add-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.add-photo:hover {
+    background-color: #f9f9f9;
+}
+
+.add-photo i {
+    font-size: 24px;
+    color: #ddd;
+}
+
+.photo-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.photo-buttons a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+}
+
 </style>
 {% load static %}
+<div class="filter-form">
+    <form method="get">
+        <label for="characters">Filtrer par personnage :</label>
+        <select name="characters" id="characters">
+            <option value="">Tous les personnages</option> <!-- Option vide pour afficher tous les postes -->
+            {% for character in characters %}
+                <option value="{{ character.id }}">{{ character.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+</div>
 
 <div class="photo-grid">
     {% for post in posts %}
         <div class="photo-item">
             <a href="post/{{ post.id }}">
-                <img src="{% static post.imageName %}" alt="{{ post.imageName }}">
-
+                <img src="{{ post.image.url }}" alt="not loading">
                 <div class="photo-caption">{{ post.description }}</div>
             </a>
+            <div class="photo-buttons">
+                <a href="{% url 'edit_post' post.id %}">
+                    <i class="fa fa-pencil"></i> Modifier
+                </a>
+                <a href="{% url 'delete_post' post.id %}">
+                    <i class="fa fa-trash"></i> Supprimer
+                </a>
+            </div>
         </div>
     {% endfor %}
 
+    <div class="photo-item add-photo">
+        <a href="addPost">
+            <img src="{% static 'plus.png' %}" alt="Ajouter une image" style="width: 60px; height: 60px;"   >
+        </a>
+    </div>
 </div>
 
 {% endblock %}
+
+
+ChatGPT
